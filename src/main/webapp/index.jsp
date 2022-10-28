@@ -5,6 +5,10 @@
  	msg = "gd\n"
  	+ "asd ";
  %>
+ 
+ <!-- html 주석 -->
+ <%-- jsp주석 --%>
+ <% // 자바 주석 %>
 <!DOCTYPE html>
 <html>
 <head>

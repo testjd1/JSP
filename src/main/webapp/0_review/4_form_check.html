@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 폼 예제 1 </title>
+<script src = 'js/formCheck.js' type="text/javascript"></script>
+<link rel = "stylesheet" href="09_myform.css">
+</head>
+<body>
+아래의 폼을 완성하시렵니까<br><br>
+<form name="frm" id='frm' method="get" action="something.jsp">
+	<label for = 'realname'>본명</label>
+	<input id = 'realname' name = 'realname' pattern="[가-힇]{2,5}" type = 'text'> <!--  서버 까지 끌고감 -> name 필요 -->
+	<label for="nickname">별명</label>
+		<input id="nickname" name = 'nickname' pattern="[A-Za-z]{3,}" maxlength="10" >
+		<br>
+		<label for="myemail">이메일</label>
+		<input type="email" name = 'myemail' id="myemail" required>
+		<br>
+		<label for="myage">나이</label>
+		<input type="number" name= 'myage' id="myage" min="0" max="100" step="20" >
+		<br>
+		
+		
+	<span>ㅇㅈ?</span>
+	
+	<input id = 'agree' name= 'agree' type = 'checkbox'>ㅇㅈ <br/>
+	
+	<input type="submit" value="눌려봐">
+</form>
+</body>
+</html>

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%
+	String id = request.getParameter("User");		// User 파라미터의 값을 받음
+	String pw = request.getParameter("Pass");		// Pass 파라미터의 값을 받음
+	
 	
 %> 
    
@@ -13,7 +16,7 @@
 </head>
 <body>
 	<h2>폼의 입력값 넘겨받아 처리</h2>
-	입력한 아이디 :  <br/>
-	입력한 패스워드 : 
+	입력한 아이디 :  <%= id %><br/>
+	입력한 패스워드 : <%= pw %>
 </body>
 </html>
