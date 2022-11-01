@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,16 +17,19 @@ $(function(){
          data : {id : $('.userinput').val()},
          success  : function(data){
             //alert('<'+data+'>');
-            if(data.trim()==true){
+            if(data.trim()=='true'){
                $('#result').text('이미 존재함');
                $('#result').show();
-            }else if(data.trim()==false){
+            }else if(data.trim()=='false'){
                $('#result').text('사용 가능함');               
             }
          }   
             
       });
    });
+   
+   
+   
    
 })
 </script>
