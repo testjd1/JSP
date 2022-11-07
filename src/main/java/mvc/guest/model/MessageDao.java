@@ -16,11 +16,11 @@ public class MessageDao {
 	
 	// DB 연결시  관한 변수 
 	private static final String 	dbDriver	=	"oracle.jdbc.driver.OracleDriver";
-	private static final String		dbUrl		=	"jdbc:oracle:thin:@127.0.0.1:1521:xe";
+	private static final String		dbUrl		=	"jdbc:oracle:thin:@192.168.0.69:1521:xe";
 	private static final String		dbUser		=	"scott";
 	private static final String		dbPass		=	"tiger";
 	
-	
+	 
 	private Connection	 		con;	
 	
 	//--------------------------------------------
@@ -122,6 +122,46 @@ public class MessageDao {
 		}		
 	}
 	
+	//메세지 제목 클릭 시, 상세 메세지 내용 가져올 때 (view)
+	
+		public Message selectById(int id) throws MessageException
+		{
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			Message m = null;
+			try{
+
+				con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
+				String sql		= "SELECT * FROM guestTB WHERE message_id=?";  
+				ps		= con.prepareStatement( sql );
+				ps.setInt(1, id);
+				
+				rs = ps.executeQuery();
+				if( rs.next())
+				{
+					
+					
+					int message_id = rs.getInt("message_id");
+					String guest_name = rs.getString("guest_name");
+					String password = rs.getString("password");
+					String message = rs.getString("message");
+					
+					m = new Message(message_id, guest_name, password, message );
+					
+				}
+				
+			
+				
+				return m;
+			}catch( Exception ex ){
+				throw new MessageException("방명록 ) DB에 목록 검색시 오류  : " + ex.toString() );	
+			} finally{
+				if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
+				if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+				if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+			}		
+		}
+		
 
 	/* -------------------------------------------------------
 	 * 현재 페이지에 보여울 메세지 목록  얻어올 때
@@ -219,6 +259,31 @@ public class MessageDao {
 					
 		}catch( Exception ex ){
 			throw new MessageException("방명록 ) DB에 삭제시 오류  : " + ex.toString() );	
+		} finally{
+			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+		}		
+	}
+	
+	public int update( Message vo ) throws MessageException
+	{
+		PreparedStatement ps = null;
+		try{
+
+			con	= DriverManager.getConnection( dbUrl, dbUser, dbPass );
+			
+			String sql		= "UPDATE GuestTB SET MESSAGE = ?  WHERE message_id=? AND password=?";  
+
+			ps		= con.prepareStatement( sql );
+			
+			ps.setString	( 1, vo.getMessage()	);
+			ps.setInt		( 2, vo.getId()	);
+			ps.setString	( 3, vo.getPassword()	);
+			
+			return ps.executeUpdate();
+					
+		}catch( Exception ex ){
+			throw new MessageException("방명록 ) DB에 수정시 오류  : " + ex.toString() );	
 		} finally{
 			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
 			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }

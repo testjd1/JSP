@@ -14,6 +14,8 @@ import mvc.guest.command.CommandDelete;
 import mvc.guest.command.CommandException;
 import mvc.guest.command.CommandInput;
 import mvc.guest.command.CommandList;
+import mvc.guest.command.CommandModify;
+import mvc.guest.command.CommandModifyForm;
 import mvc.guest.command.CommandNull;
 
 /**
@@ -34,15 +36,16 @@ public class GuestControl extends HttpServlet {
 	private void initCommand(){
 		commandMap = new HashMap();
 
-		commandMap.put("main-page",	new CommandNull("main.jsp") );	//	 메인 -> 메인
-		commandMap.put("list-page",	new CommandList("listMessage.jsp") );		// 리스트 -> 리스트
-		commandMap.put("input-form", new CommandNull("insertMessage.jsp") );	// 인풋 -> 인설트메세지
-		commandMap.put("input-do", new CommandInput("saveMessage.jsp") );		// 인설트-> 저장
-		commandMap.put("delete-form", new CommandNull("deleteMessage.jsp") );	// 인풋 -> 인설트메세지
-		commandMap.put("delete-page", new CommandDelete("deleteConfirm.jsp") );		
+		commandMap.put("main-page",	new CommandNull("main.jsp") );
+		commandMap.put("list-page",	new CommandList("listMessage.jsp") );
+		// 나머지도 추가하기	
+		commandMap.put("input-form", new CommandNull("insertMessage.jsp"));
+		commandMap.put("input-do", new CommandInput("saveMessage.jsp"));
+		commandMap.put("delete-form", new CommandNull("deleteMessage.jsp"));
+		commandMap.put("delete-do", new CommandDelete("deleteConfirm.jsp"));
+		commandMap.put("modify-form",  new CommandModifyForm("modifyForm.jsp"));
+		commandMap.put("modify-do",  new CommandModify("modify.jsp"));
 		
-		
-		// 나머지도 추가하기		
 		
 	}
 
@@ -59,11 +62,12 @@ public class GuestControl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String nextPage = "";
-		String cmdKey	= request.getParameter("cmd");	// 파라미터 받음
+		String cmdKey	= request.getParameter("cmd");
 		if( cmdKey == null ){
 			cmdKey = "main-page";
 		}
 
+		System.out.println("경로: " + cmdKey);
 		
 		Command cmd = null;
 

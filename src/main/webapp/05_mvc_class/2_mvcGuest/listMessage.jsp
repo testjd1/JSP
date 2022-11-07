@@ -5,10 +5,7 @@
  
 <%
 	// Control에서 param에 저장한 mList 변수에 지정
-								//파라미터=오브젝트 이므로 형변환
-	List <Message> mList = (List<Message>)request.getAttribute("param");  
-							// db값에 setAttribute로 받아서
- 
+	List <Message> mList = (List <Message>)request.getAttribute("param");  
 	
 %>    
 <!DOCTYPE html>
@@ -30,7 +27,8 @@
 		<tr>	
 			<td> <%= msg.getId() %> </td> 
 			<td> <%= msg.getGuestName() %></td> 
-			<td> <a href="GuestControl?cmd=delete-form&id=<%= msg.getId() %>"> [ 삭제하기 ]</a> </td>			
+			<td> <a href="GuestControl?cmd=delete-form&id=<%= msg.getId() %>"> [ 삭제하기 ]</a> </td>		
+			<td> <a href="GuestControl?cmd=modify-form&id=<%= msg.getId() %>"> [ 수정하기 ]</a> </td>
 		</tr>
 		<tr>
 			<td colspan='3'> 

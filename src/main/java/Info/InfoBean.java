@@ -1,4 +1,4 @@
-package Info;
+package info;
 
 public class InfoBean {
    private String id;
