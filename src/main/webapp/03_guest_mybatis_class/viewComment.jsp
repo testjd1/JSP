@@ -21,7 +21,7 @@
 		<tr><td>메세지</td><td><%=  comment.getCommentContent()%></td></tr>
 		<tr><td>등록일</td><td><%=  comment.getRegDate()%></td></tr>
 		<tr><td colspan="2">
-				<input type="button" id="btnModify" value="수정" />
+				<a href="ModifyCommentForm.jsp?cId=<%=comment.getCommentNo()%>"><input type="button" id="btnModify" value="수정" /></a>
 				<a href="deleteCommentForm.jsp?cId=<%=comment.getCommentNo()%>"><input type="button" id="btnDelete" value="삭제" /></a>
 				</td></tr>
 </table>
